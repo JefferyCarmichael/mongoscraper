@@ -8,14 +8,16 @@
                 <h4 class="modal-title">Notes for {{this.title}}</h4>
             </div>
             <div class="modal-body">
-                {{#if this.notes}} {{#each this.notes}}
+                {{#if this.note}}
+                
                 <div class="card">
                     <div class="card-header">
-                        <p class="previousNotes"> {{this.body}}</p>
-                        <button type="button" class="btn btn-danger deleteNote" data-note-id={{this._id}} data-article-id={{this.article}}>X</button>
+                        <p class="previousNotes"> {{this.note.body}}</p>
+                        <button type="button" class="btn btn-danger deleteNote" data-note-id={{this.note._id}} >X</button>
                     </div>
                 </div>
-                {{/each}} {{else}}
+                
+                {{else}}
                 <div class="card">
                     <div class="card-body">
                         <h4>No notes for this article yet.</h4>

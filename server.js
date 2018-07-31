@@ -9,7 +9,6 @@ var app = express();
 var axios = require("axios");
 app.use(express.static("./public"));
 
-// Requiring Note and Article models
 
 // var Article = require("./models/Article.js");
 var db = require("./models");
@@ -59,10 +58,11 @@ app.get("/", function (req, res) {
 });
 
 app.get("/saved", function (req, res) {
-  db.Article.find({ "saved": true }).populate("notes").exec(function (error, articles) {
+  db.Article.find({ "saved": true }).populate("note").exec(function (error, articles) {
     var hbJson2 = {
       article: articles
     };
+    console.log(articles);
     res.render("saved", hbJson2);
   });
 });
@@ -100,26 +100,6 @@ app.get("/scrape", function (req, res) {
 });
 
 
-// Grab an article by it's ObjectId
-app.get("/articles/:id", function (req, res) {
-  // Using the id to finds the note
-  db.Article.findOne({ "_id": req.params.id })
-    // ..and populate all of the notes associated with it
-    .populate("Note")
-    // now, execute our query
-    .exec(function (error, doc) {
-      // Log any errors
-      if (error) {
-        console.log(error);
-      }
-      // Otherwise, send the doc to the browser as a json object
-      else {
-        res.json(doc);
-      }
-    });
-});
-
-
 // Save an article
 app.post("/articles/save/:id", function (req, res) {
   // Use the article id to find and update its saved boolean
@@ -138,7 +118,6 @@ app.post("/articles/save/:id", function (req, res) {
 });
 
 
-
 // Create a new note
 // Route for saving/updating an Article's associated Note
 app.post("/notes/save/:id", function (req, res) {
@@ -148,7 +127,7 @@ app.post("/notes/save/:id", function (req, res) {
   db.Note.create(req.body)
     .then(function (dbNote) {
 
-      db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
     })
     .then(function (dbnote) {
       // Update an Article,
@@ -161,11 +140,8 @@ app.post("/notes/save/:id", function (req, res) {
 });
 
 
-
-
-
 // Delete an article
-app.delete("/articles/delete", function (req, res) {
+app.get("/clear", function (req, res) {
   // Use the article id to find and update its saved boolean
   db.Article.remove({ "saved": false })
     // Execute the above query
@@ -182,31 +158,16 @@ app.delete("/articles/delete", function (req, res) {
 });
 
 // Delete a note
-app.delete("/notes/delete/:note_id/:article_id", function (req, res) {
+app.get("/notes/delete/:id", function (req, res) {
   // Use the note id to find and delete it
-  db.Note.findOneAndRemove({ "_id": req.params.note_id }, function (err) {
-    // Log any errors
-    if (err) {
-      console.log(err);
-      res.send(err);
-    }
-    else {
-      return db.Article.findOneAndUpdate({ "_id": req.params.article_id }, { $pull: { "notes": req.params.note_id } })
-        // Execute the above query
-        .exec(function (err) {
-          // Log any errors
-          if (err) {
-            console.log(err);
-            res.send(err);
-          }
-          else {
-            // Or send the note to the browser
-            res.send("Note Deleted");
-          }
-        });
-    }
-  });
-});
+  db.Note.findOneAndRemove({ "_id": req.params.id }).then(function (response) {
+    res.redirect("/saved")
+  }).catch(function (err) {
+    res.json(err)
+  })
+
+})
+
 
 // Delete an article
 app.post("/articles/delete/:id", function (req, res) {
@@ -224,27 +185,6 @@ app.post("/articles/delete/:id", function (req, res) {
       }
     });
 });
-
-
-app.get("/notes/:id", function (req, res) {
-  console.log("This is the req.params: " + req.params.id);
-  Article.find({
-    "_id": req.params.id
-  }).populate("note")
-    .exec(function (error, doc) {
-      if (error) {
-        console.log(error);
-      }
-      else {
-        var notesObj = {
-          Article: doc
-        };
-        console.log(notesObj);
-        res.render("notes", notesObj);
-      }
-    });
-});
-
 
 
 // Listen on port

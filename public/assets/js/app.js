@@ -5,7 +5,6 @@ $("#scrape").on("click", function() {
         url: "/scrape",
     }).done(function(data) {
         console.log(data)
-        // window.location = "/"
         $(location).attr("href","/");
     })
 });
@@ -23,7 +22,7 @@ $(".save").on("click", function() {
         method: "POST",
         url: "/articles/save/" + thisId
     }).done(function(data) {
-        window.location = "/"
+        $(location).attr("href","/");
     })
 });
 
@@ -34,7 +33,7 @@ $(".delete").on("click", function() {
         method: "POST",
         url: "/articles/delete/" + thisId
     }).done(function(data) {
-        window.location = "/saved"
+        $(location).attr("href","/");
     })
 });
 
@@ -44,7 +43,7 @@ $(".saveNote").on("click", function(event) {
     var note = {};
     id = $(this).attr("data-id");
     note.body =$("#noteText").val().trim();
-    console.log("note:"+ note);
+    console.log("note:"+ note.body);
     if (!$("#noteText").val()) {
         alert("please enter a note to save")
     }else {
@@ -64,14 +63,16 @@ $(".saveNote").on("click", function(event) {
 //Handle Delete Note button
 $(".deleteNote").on("click", function() {
     var noteId = $(this).attr("data-note-id");
-    var articleId = $(this).attr("data-article-id");
+    // var articleId = $(this).attr("data-id");
+    // console.log(articleId);
+ 
     $.ajax({
-        method: "DELETE",
-        url: "/notes/delete/" + noteId + "/" + articleId
+        method: "GET",
+        url: "/notes/delete/" + noteId
     }).done(function(data) {
-        console.log(data)
+       
         $(".modalNote").modal("hide");
         // window.location = "/saved"
-        $(location).attr("href","/notes/:id");
+        $(location).attr("href","/saved");
     })
 });

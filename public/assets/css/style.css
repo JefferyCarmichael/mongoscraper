@@ -48,8 +48,13 @@ H1{
 }
 
 .jumbotron{
+    font-family: 'Fugaz One', cursive;
     margin: 40px;
     box-shadow: 3px 4px 5px 1px rgba(88, 88, 92, 0.2); 
-    background-image: linear-gradient(rgba(0, 0, 255, 0.342), rgba(255, 255, 0, 0.274)), url("/assets/images/newspaper.jpg");
-    
+
+    background-image: linear-gradient(rgba(27, 27, 32, 0.705), rgba(125, 127, 128, 0.274), rgba(125, 127, 128, 0.274),rgba(27, 27, 32, 0.705)), url("/assets/images/newspaper.jpg");   
+}
+
+#clear{
+ margin-left: 10px;
 }
