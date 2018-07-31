@@ -1,35 +1,32 @@
-
-
 <div class="container">
     <div class="jumbotron">
         <div class="text-center">
-            <h1> Mongo Scraper</h1>
+            <h1 class="display-4"> Mongo Scraper</h1>
         </div>
     </div>
 
     <div class="col-md-12">
-        {{#if article}}
-            {{#each article}}
-            <div class="card">
-                <div class="card-header">
-                    <h4>{{this.title}}</h4>
-                </div>
-                </div>
-                <div class="card">
-                <div class="card-body">
-                    <p> {{this.summary}}</p>
-                    <a href={{this.link}} target="_blank">{{this.link}}</a>
-                    <br><br>
-                    <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
-                </div>
+        {{#if article}} {{#each article}}
+        <div class="card">
+            <div class="card-header">
+                <h4>{{this.title}}</h4>
             </div>
-            {{/each}}
-        {{else}}
+        </div>
         <div class="card">
             <div class="card-body">
-            <h4>Uh Oh. Looks like we don't have any new articles.</h4>
+                <p> {{this.summary}}</p>
+                <a href={{this.link}} target="_blank">{{this.link}}</a>
+                <br>
+                <br>
+                <button type="button" class="btn btn-success save" data-id={{this._id}}>Save Article</button>
             </div>
-         </div>
+        </div>
+        {{/each}} {{else}}
+        <div class="card">
+            <div class="card-body">
+                <h4>Uh Oh. Looks like we don't have any new articles.</h4>
+            </div>
+        </div>
         {{/if}}
     </div>
 </div>

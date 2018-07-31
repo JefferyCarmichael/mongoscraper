@@ -2,6 +2,11 @@
     color:rgb(32, 27, 27);
 }
 
+#mainnav{
+
+    box-shadow: 2px 2px 8px 2px rgba(92, 92, 97, 0.2);
+    text-shadow: 1px 1px 3px rgba(63, 63, 66, 0.671);
+}
 .card{
     margin-bottom: 10px;
     
@@ -10,9 +15,41 @@
 .card-body{
     padding: 10px;
     
-
+    box-shadow: 3px 3px 5px 1px rgba(92, 92, 97, 0.2);
+    text-shadow: 1px 1px 2px rgba(63, 63, 66, 0.397);
 }
 
 .card-header{
-    background-color: rgb(238, 228, 228);
+    background-color: rgb(216, 218, 221);
+    box-shadow: 3px 3px 5px 1px rgba(92, 92, 97, 0.2);   
+    text-shadow: 1px 1px 3px rgba(63, 63, 66, 0.582);
+}
+
+.btn{
+    box-shadow: 3px 3px 4px 1px rgba(67, 67, 71, 0.438);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(63, 63, 66, 0.671);
+}
+
+#noteText{
+    box-shadow: 3px 3px 5px 1px rgba(92, 92, 97, 0.2); 
+}
+
+.modal-header{
+    background-color: rgb(237, 237, 241);
+    text-shadow: 1px 1px 3px rgba(63, 63, 66, 0.589);
+    box-shadow: 3px 3px 5px 1px rgba(88, 88, 92, 0.2); 
+}
+
+H1{
+    text-shadow: 1px 2px 4px rgba(63, 63, 66, 0.671);
+    font-size: 60px !important ;
+   font-weight: bold;
+}
+
+.jumbotron{
+    margin: 40px;
+    box-shadow: 3px 4px 5px 1px rgba(88, 88, 92, 0.2); 
+    background-image: linear-gradient(rgba(0, 0, 255, 0.342), rgba(255, 255, 0, 0.274)), url("/assets/images/newspaper.jpg");
+    
 }
