@@ -17,7 +17,8 @@ var db = require("./models");
 // Scraping tools
 var request = require("request");
 var cheerio = require("cheerio");
-
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
 mongoose.Promise = Promise;
 
@@ -41,7 +42,9 @@ app.set("view engine", "handlebars");
 
 
 // Mongo with Mongoose
-mongoose.connect("mongodb://localhost/scraper");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
 
 
 //GET request to show Handlebars pages
@@ -139,8 +142,8 @@ app.post("/articles/save/:id", function(req, res) {
 // Create a new note
 // Route for saving/updating an Article's associated Note
 app.post("/notes/save/:id", function(req, res) {
-  console.log(req.body)
-  console.log(req.params.id)
+  console.log("body: "+req.body)
+  console.log("Id: "+req.params.id)
   // Create a new note and pass the req.body to the entry
   db.Note.create(req.body)
     .then(function(dbNote) {
@@ -148,13 +151,30 @@ app.post("/notes/save/:id", function(req, res) {
       return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
     })
     .then(function(dbArticle) {
-      // If we were able to successfully update an Article, send it back to the client
+      // Update an Article, send it back to the c
       res.json(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
       res.json(err);
     });
+});
+
+// Delete an article
+app.delete("/articles/delete", function(req, res) {
+  // Use the article id to find and update its saved boolean
+  db.Article.remove({"saved": false})
+  // Execute the above query
+  .exec(function(err, doc) {
+    // Log any errors
+    if (err) {
+      console.log(err);
+    }
+    else {
+      // Or send the document to the browser
+      res.redirect("/");
+    }
+  });
 });
 
 // Delete a note
@@ -199,6 +219,26 @@ app.post("/articles/delete/:id", function(req, res) {
       res.send(doc);
     }
   });
+});
+
+
+app.get("/notes/:id", function (req, res) {
+  console.log("This is the req.params: " + req.params.id);
+  Article.find({
+    "_id": req.params.id
+  }).populate("note")
+    .exec(function (error, doc) {
+      if (error) {
+        console.log(error);
+      }
+      else {
+        var notesObj = {
+          Article: doc
+        };
+        console.log(notesObj);
+        res.render("notes", notesObj);
+      }
+    });
 });
 
 

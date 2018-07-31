@@ -1,3 +1,18 @@
 *{
-    color: red;
+    color:rgb(32, 27, 27);
+}
+
+.card{
+    margin-bottom: 10px;
+    
+}
+
+.card-body{
+    padding: 10px;
+    
+
+}
+
+.card-header{
+    background-color: rgb(238, 228, 228);
 }

@@ -52,10 +52,11 @@ $(".saveNote").on("click", function(event) {
       $.post("/notes/save/" + id,  { body: note.body}).then(function(data) {
               // Log the response
               console.log(data);
-              // Empty the notes section
-            //   $("#noteText" + thisId).val("");
-            //   $(".modalNote").modal("hide");
+            //   clear note box
+              $("#noteText").val("");
+              $(".modalNote").modal("hide");
             //   window.location = "/saved"
+              $(location).attr("href","/saved");
           });
         }    
 });
@@ -70,6 +71,7 @@ $(".deleteNote").on("click", function() {
     }).done(function(data) {
         console.log(data)
         $(".modalNote").modal("hide");
-        window.location = "/saved"
+        // window.location = "/saved"
+        $(location).attr("href","/notes/:id");
     })
 });
