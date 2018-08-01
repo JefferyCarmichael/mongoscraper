@@ -42,7 +42,7 @@
 }
 
 H1{
-    text-shadow: 1px 2px 4px rgba(63, 63, 66, 0.671);
+    text-shadow: 2px 2px 15px rgba(30, 30, 31, 0.87);
     font-size: 60px !important ;
    font-weight: bold;
 }
@@ -50,7 +50,7 @@ H1{
 .jumbotron{
     font-family: 'Fugaz One', cursive;
     margin: 40px;
-    box-shadow: 3px 4px 5px 1px rgba(88, 88, 92, 0.2); 
+    box-shadow: 10px 10px 15px 2px rgba(20, 20, 20, 0.37); 
 
     background-image: linear-gradient(rgba(27, 27, 32, 0.705), rgba(125, 127, 128, 0.274), rgba(125, 127, 128, 0.274),rgba(27, 27, 32, 0.705)), url("/assets/images/newspaper.jpg");   
 }
