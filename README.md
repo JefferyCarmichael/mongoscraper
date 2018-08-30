@@ -1,6 +1,8 @@
 # Mongoscraper
 
-The App scans newspaper for Headlines, urls, summaries and display them for the user. Users are able to leave comments on the articles displayed and revisit them later. The comments should be saved to the database as well and associated with their articles. Users are also able delete comments left on articles. All stored comments should be visible to every user.
+![Mongo](/public/assets/images/Mongo.jpg)
+
+The App scans _**The Atlanta Voice**_ newspaper for headlines, urls, summaries and display them for the user. Users are able to leave comments on the articles displayed and revisit them later. The comments are saved to a Mongo database as well and associated with their articles. Users can also delete comments left on articles. All stored comments are be visible to every user.
 
 
 The app should scrape and display the following information:

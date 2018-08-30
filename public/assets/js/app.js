@@ -43,6 +43,8 @@ $(".saveNote").on("click", function(event) {
     var note = {};
     id = $(this).attr("data-id");
     note.body =$("#noteText").val().trim();
+    console.log("noteText");
+    // note.body =$("data-noteid").val().trim();
     console.log("note:"+ note.body);
     if (!$("#noteText").val()) {
         alert("please enter a note to save")
@@ -54,7 +56,6 @@ $(".saveNote").on("click", function(event) {
             //   clear note box
               $("#noteText").val("");
               $(".modalNote").modal("hide");
-            //   window.location = "/saved"
               $(location).attr("href","/saved");
           });
         }    
@@ -62,9 +63,9 @@ $(".saveNote").on("click", function(event) {
 
 //Handle Delete Note button
 $(".deleteNote").on("click", function() {
-    var noteId = $(this).attr("data-note-id");
-    // var articleId = $(this).attr("data-id");
-    // console.log(articleId);
+//   var articleId = $(this).attr("data-id");
+var noteId = $(this).attr("data-note-id");
+ // console.log(articleId);
  
     $.ajax({
         method: "GET",
@@ -72,7 +73,6 @@ $(".deleteNote").on("click", function() {
     }).done(function(data) {
        
         $(".modalNote").modal("hide");
-        // window.location = "/saved"
         $(location).attr("href","/saved");
     })
 });

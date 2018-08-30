@@ -77,15 +77,11 @@ app.get("/scrape", function (req, res) {
     $(".oht-article").each(function (i, element) {
 
       var result = {};
-
-
       result.link = $(element).find("a").attr("href");
       result.title = $(element).find("a").text().trim();
       result.summary = $(element).find("p").next().text();
-
       db.Article.create(result)
         .then(function (dbArticle) {
-
           console.log(dbArticle);
         })
         .catch(function (err) {
