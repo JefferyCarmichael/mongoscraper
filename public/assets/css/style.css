@@ -6,6 +6,7 @@
 
     box-shadow: 2px 2px 8px 2px rgba(92, 92, 97, 0.2);
     text-shadow: 1px 1px 3px rgba(63, 63, 66, 0.671);
+    margin: 10px;
 }
 .card{
     margin-bottom: 10px;
@@ -14,7 +15,6 @@
 
 .card-body{
     padding: 10px;
-    
     box-shadow: 3px 3px 5px 1px rgba(92, 92, 97, 0.2);
     text-shadow: 1px 1px 2px rgba(63, 63, 66, 0.397);
 }
@@ -49,12 +49,18 @@ H1{
 
 .jumbotron{
     font-family: 'Fugaz One', cursive;
-    margin: 40px;
+    margin: 30px;
     box-shadow: 10px 10px 15px 2px rgba(20, 20, 20, 0.37); 
 
-    background-image: linear-gradient(rgba(27, 27, 32, 0.705), rgba(125, 127, 128, 0.274), rgba(125, 127, 128, 0.274),rgba(27, 27, 32, 0.705)), url("/assets/images/newspaper.jpg");   
-}
+    background-image: linear-gradient(rgba(27, 27, 32, 0.705), rgba(125, 127, 128, 0.274), rgba(125, 127, 128, 0.274),rgba(27, 27, 32, 0.705)), url("/assets/images/tav3.png");   
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; 
+    height: 200px;
+    background-size:100% 100%;
+    padding: 20px;
 
+}
 #clear{
  margin-left: 10px;
 }
